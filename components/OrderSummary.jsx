@@ -28,39 +28,58 @@ const OrderSummary = () => {
   }, [])
 
   return (
-    <div className="w-full md:w-96 bg-gray-500/5 p-5">
-      <h2 className="text-xl md:text-2xl font-medium text-gray-700">
-        Order Summary
+    <div 
+      className="w-full md:w-96 p-5"
+      style={{ backgroundColor: '#F6F7EC' }}
+    >
+      <h2 
+        className="text-xl md:text-2xl font-medium"
+        style={{ color: '#131837' }}
+      >
+        Résumé de Commande
       </h2>
-      <hr className="border-gray-500/30 my-5" />
+      <hr 
+        className="my-5"
+        style={{ borderColor: '#131837', borderWidth: '1px', opacity: 0.3 }}
+      />
       <div className="space-y-6">
         <div>
-          <label className="text-base font-medium uppercase text-gray-600 block mb-2">
-            Select Address
+          <label 
+            className="text-base font-medium uppercase block mb-2"
+            style={{ color: '#131837' }}
+          >
+            Sélectionner une Adresse
           </label>
-          <div className="relative inline-block w-full text-sm border">
+          <div className="relative inline-block w-full text-sm border" style={{ borderColor: '#131837' }}>
             <button
-              className="peer w-full text-left px-4 pr-2 py-2 bg-white text-gray-700 focus:outline-none"
+              className="peer w-full text-left px-4 pr-2 py-2 bg-white focus:outline-none"
+              style={{ color: '#131837' }}
               onClick={() => setIsDropdownOpen(!isDropdownOpen)}
             >
               <span>
                 {selectedAddress
                   ? `${selectedAddress.fullName}, ${selectedAddress.area}, ${selectedAddress.city}, ${selectedAddress.state}`
-                  : "Select Address"}
+                  : "Sélectionner une adresse"}
               </span>
               <svg className={`w-5 h-5 inline float-right transition-transform duration-200 ${isDropdownOpen ? "rotate-0" : "-rotate-90"}`}
-                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#6B7280"
+                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="#131837"
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
               </svg>
             </button>
 
             {isDropdownOpen && (
-              <ul className="absolute w-full bg-white border shadow-md mt-1 z-10 py-1.5">
+              <ul 
+                className="absolute w-full bg-white border shadow-md mt-1 z-10 py-1.5"
+                style={{ borderColor: '#131837' }}
+              >
                 {userAddresses.map((address, index) => (
                   <li
                     key={index}
-                    className="px-4 py-2 hover:bg-gray-500/10 cursor-pointer"
+                    className="px-4 py-2 cursor-pointer transition-colors duration-300"
+                    style={{ color: '#131837' }}
+                    onMouseEnter={(e) => e.target.style.backgroundColor = '#F6F7EC'}
+                    onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
                     onClick={() => handleAddressSelect(address)}
                   >
                     {address.fullName}, {address.area}, {address.city}, {address.state}
@@ -68,9 +87,12 @@ const OrderSummary = () => {
                 ))}
                 <li
                   onClick={() => router.push("/add-address")}
-                  className="px-4 py-2 hover:bg-gray-500/10 cursor-pointer text-center"
+                  className="px-4 py-2 cursor-pointer text-center transition-colors duration-300 font-medium"
+                  style={{ color: '#E16939' }}
+                  onMouseEnter={(e) => e.target.style.backgroundColor = '#F6F7EC'}
+                  onMouseLeave={(e) => e.target.style.backgroundColor = 'transparent'}
                 >
-                  + Add New Address
+                  + Ajouter une Nouvelle Adresse
                 </li>
               </ul>
             )}
@@ -78,45 +100,83 @@ const OrderSummary = () => {
         </div>
 
         <div>
-          <label className="text-base font-medium uppercase text-gray-600 block mb-2">
-            Promo Code
+          <label 
+            className="text-base font-medium uppercase block mb-2"
+            style={{ color: '#131837' }}
+          >
+            Code Promo
           </label>
           <div className="flex flex-col items-start gap-3">
             <input
               type="text"
-              placeholder="Enter promo code"
-              className="flex-grow w-full outline-none p-2.5 text-gray-600 border"
+              placeholder="Entrer le code promo"
+              className="flex-grow w-full outline-none p-2.5 border"
+              style={{ 
+                color: '#131837', 
+                borderColor: '#131837',
+                borderWidth: '1px'
+              }}
+              onFocus={(e) => e.target.style.borderColor = '#E16939'}
+              onBlur={(e) => e.target.style.borderColor = '#131837'}
             />
-            <button className="bg-orange-600 text-white px-9 py-2 hover:bg-orange-700">
-              Apply
+            <button 
+              className="text-white px-9 py-2 transition-all duration-300 hover:scale-105 hover:shadow-md rounded"
+              style={{ backgroundColor: '#E16939' }}
+            >
+              Appliquer
             </button>
           </div>
         </div>
 
-        <hr className="border-gray-500/30 my-5" />
+        <hr 
+          className="my-5"
+          style={{ borderColor: '#131837', borderWidth: '1px', opacity: 0.3 }}
+        />
 
         <div className="space-y-4">
           <div className="flex justify-between text-base font-medium">
-            <p className="uppercase text-gray-600">Items {getCartCount()}</p>
-            <p className="text-gray-800">{currency}{getCartAmount()}</p>
+            <p 
+              className="uppercase"
+              style={{ color: '#131837' }}
+            >
+              Articles {getCartCount()}
+            </p>
+            <p style={{ color: '#131837' }}>{currency}{getCartAmount()}</p>
           </div>
           <div className="flex justify-between">
-            <p className="text-gray-600">Shipping Fee</p>
-            <p className="font-medium text-gray-800">Free</p>
+            <p style={{ color: '#131837', opacity: 0.7 }}>Frais de Livraison</p>
+            <p 
+              className="font-medium"
+              style={{ color: '#131837' }}
+            >
+              Gratuit
+            </p>
           </div>
           <div className="flex justify-between">
-            <p className="text-gray-600">Tax (2%)</p>
-            <p className="font-medium text-gray-800">{currency}{Math.floor(getCartAmount() * 0.02)}</p>
+            <p style={{ color: '#131837', opacity: 0.7 }}>Taxes (2%)</p>
+            <p 
+              className="font-medium"
+              style={{ color: '#131837' }}
+            >
+              {currency}{Math.floor(getCartAmount() * 0.02)}
+            </p>
           </div>
-          <div className="flex justify-between text-lg md:text-xl font-medium border-t pt-3">
-            <p>Total</p>
-            <p>{currency}{getCartAmount() + Math.floor(getCartAmount() * 0.02)}</p>
+          <div 
+            className="flex justify-between text-lg md:text-xl font-medium border-t pt-3"
+            style={{ borderColor: '#131837', borderWidth: '1px', opacity: 0.3 }}
+          >
+            <p style={{ color: '#131837' }}>Total</p>
+            <p style={{ color: '#131837' }}>{currency}{getCartAmount() + Math.floor(getCartAmount() * 0.02)}</p>
           </div>
         </div>
       </div>
 
-      <button onClick={createOrder} className="w-full bg-orange-600 text-white py-3 mt-5 hover:bg-orange-700">
-        Place Order
+      <button 
+        onClick={createOrder} 
+        className="w-full text-white py-3 mt-5 transition-all duration-300 hover:scale-105 hover:shadow-md font-medium rounded"
+        style={{ backgroundColor: '#E16939' }}
+      >
+        Passer Commande
       </button>
     </div>
   );

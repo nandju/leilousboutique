@@ -33,10 +33,13 @@ const Product = () => {
         <div className="px-6 md:px-16 lg:px-32 pt-14 space-y-10">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
                 <div className="px-5 lg:px-16 xl:px-20">
-                    <div className="rounded-lg overflow-hidden bg-gray-500/10 mb-4">
+                    <div 
+                        className="rounded-lg overflow-hidden mb-4"
+                        style={{ backgroundColor: '#F6F7EC' }}
+                    >
                         <Image
                             src={mainImage || productData.image[0]}
-                            alt="alt"
+                            alt="image du produit"
                             className="w-full h-auto object-cover mix-blend-multiply"
                             width={1280}
                             height={720}
@@ -48,11 +51,12 @@ const Product = () => {
                             <div
                                 key={index}
                                 onClick={() => setMainImage(image)}
-                                className="cursor-pointer rounded-lg overflow-hidden bg-gray-500/10"
+                                className="cursor-pointer rounded-lg overflow-hidden transition-all duration-300 hover:scale-105"
+                                style={{ backgroundColor: '#F6F7EC' }}
                             >
                                 <Image
                                     src={image}
-                                    alt="alt"
+                                    alt={`image produit ${index + 1}`}
                                     className="w-full h-auto object-cover mix-blend-multiply"
                                     width={1280}
                                     height={720}
@@ -64,47 +68,87 @@ const Product = () => {
                 </div>
 
                 <div className="flex flex-col">
-                    <h1 className="text-3xl font-medium text-gray-800/90 mb-4">
+                    <h1 
+                        className="text-3xl font-medium mb-4"
+                        style={{ color: '#131837' }}
+                    >
                         {productData.name}
                     </h1>
                     <div className="flex items-center gap-2">
                         <div className="flex items-center gap-0.5">
-                            <Image className="h-4 w-4" src={assets.star_icon} alt="star_icon" />
-                            <Image className="h-4 w-4" src={assets.star_icon} alt="star_icon" />
-                            <Image className="h-4 w-4" src={assets.star_icon} alt="star_icon" />
-                            <Image className="h-4 w-4" src={assets.star_icon} alt="star_icon" />
+                            <Image className="h-4 w-4" src={assets.star_icon} alt="icône étoile" />
+                            <Image className="h-4 w-4" src={assets.star_icon} alt="icône étoile" />
+                            <Image className="h-4 w-4" src={assets.star_icon} alt="icône étoile" />
+                            <Image className="h-4 w-4" src={assets.star_icon} alt="icône étoile" />
                             <Image
                                 className="h-4 w-4"
                                 src={assets.star_dull_icon}
-                                alt="star_dull_icon"
+                                alt="icône étoile vide"
                             />
                         </div>
-                        <p>(4.5)</p>
+                        <p style={{ color: '#131837', opacity: 0.7 }}>(4.5)</p>
                     </div>
-                    <p className="text-gray-600 mt-3">
+                    <p 
+                        className="mt-3"
+                        style={{ color: '#131837', opacity: 0.8 }}
+                    >
                         {productData.description}
                     </p>
-                    <p className="text-3xl font-medium mt-6">
-                        ${productData.offerPrice}
-                        <span className="text-base font-normal text-gray-800/60 line-through ml-2">
-                            ${productData.price}
+                    <p 
+                        className="text-3xl font-medium mt-6"
+                        style={{ color: '#131837' }}
+                    >
+                        {productData.offerPrice}€
+                        <span 
+                            className="text-base font-normal line-through ml-2"
+                            style={{ color: '#131837', opacity: 0.6 }}
+                        >
+                            {productData.price}€
                         </span>
                     </p>
-                    <hr className="bg-gray-600 my-6" />
+                    <hr 
+                        className="my-6"
+                        style={{ backgroundColor: '#131837', opacity: 0.2 }}
+                    />
                     <div className="overflow-x-auto">
                         <table className="table-auto border-collapse w-full max-w-72">
                             <tbody>
                                 <tr>
-                                    <td className="text-gray-600 font-medium">Brand</td>
-                                    <td className="text-gray-800/50 ">Generic</td>
+                                    <td 
+                                        className="font-medium py-1"
+                                        style={{ color: '#131837' }}
+                                    >
+                                        Marque
+                                    </td>
+                                    <td 
+                                        style={{ color: '#131837', opacity: 0.6 }}
+                                    >
+                                        Générique
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td className="text-gray-600 font-medium">Color</td>
-                                    <td className="text-gray-800/50 ">Multi</td>
+                                    <td 
+                                        className="font-medium py-1"
+                                        style={{ color: '#131837' }}
+                                    >
+                                        Couleur
+                                    </td>
+                                    <td 
+                                        style={{ color: '#131837', opacity: 0.6 }}
+                                    >
+                                        Multicolore
+                                    </td>
                                 </tr>
                                 <tr>
-                                    <td className="text-gray-600 font-medium">Category</td>
-                                    <td className="text-gray-800/50">
+                                    <td 
+                                        className="font-medium py-1"
+                                        style={{ color: '#131837' }}
+                                    >
+                                        Catégorie
+                                    </td>
+                                    <td 
+                                        style={{ color: '#131837', opacity: 0.6 }}
+                                    >
                                         {productData.category}
                                     </td>
                                 </tr>
@@ -113,25 +157,68 @@ const Product = () => {
                     </div>
 
                     <div className="flex items-center mt-10 gap-4">
-                        <button onClick={() => addToCart(productData._id)} className="w-full py-3.5 bg-gray-100 text-gray-800/80 hover:bg-gray-200 transition">
-                            Add to Cart
+                        <button 
+                            onClick={() => addToCart(productData._id)} 
+                            className="w-full py-3.5 font-medium transition-all duration-300 hover:scale-105 hover:shadow-md border-2 rounded"
+                            style={{
+                                borderColor: '#131837',
+                                color: '#131837',
+                                backgroundColor: 'transparent'
+                            }}
+                            onMouseEnter={(e) => {
+                                e.target.style.backgroundColor = '#131837';
+                                e.target.style.color = '#F6F7EC';
+                            }}
+                            onMouseLeave={(e) => {
+                                e.target.style.backgroundColor = 'transparent';
+                                e.target.style.color = '#131837';
+                            }}
+                        >
+                            Ajouter au panier
                         </button>
-                        <button onClick={() => { addToCart(productData._id); router.push('/cart') }} className="w-full py-3.5 bg-orange-500 text-white hover:bg-orange-600 transition">
-                            Buy now
+                        <button 
+                            onClick={() => { addToCart(productData._id); router.push('/cart') }} 
+                            className="w-full py-3.5 text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-md rounded"
+                            style={{ backgroundColor: '#E16939' }}
+                        >
+                            Acheter maintenant
                         </button>
                     </div>
                 </div>
             </div>
             <div className="flex flex-col items-center">
                 <div className="flex flex-col items-center mb-4 mt-16">
-                    <p className="text-3xl font-medium">Featured <span className="font-medium text-orange-600">Products</span></p>
-                    <div className="w-28 h-0.5 bg-orange-600 mt-2"></div>
+                    <p 
+                        className="text-3xl font-medium"
+                        style={{ color: '#131837' }}
+                    >
+                        Produits <span style={{ color: '#E16939' }}>Vedettes</span>
+                    </p>
+                    <div 
+                        className="w-28 h-0.5 mt-2"
+                        style={{ backgroundColor: '#E16939' }}
+                    ></div>
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 mt-6 pb-14 w-full">
                     {products.slice(0, 5).map((product, index) => <ProductCard key={index} product={product} />)}
                 </div>
-                <button className="px-8 py-2 mb-16 border rounded text-gray-500/70 hover:bg-slate-50/90 transition">
-                    See more
+                <button 
+                    className="px-8 py-2 mb-16 border-2 rounded font-medium transition-all duration-300 hover:scale-105 hover:shadow-md"
+                    style={{
+                        borderColor: '#131837',
+                        color: '#131837',
+                        backgroundColor: 'transparent'
+                    }}
+                    onMouseEnter={(e) => {
+                        e.target.style.backgroundColor = '#131837';
+                        e.target.style.color = '#F6F7EC';
+                    }}
+                    onMouseLeave={(e) => {
+                        e.target.style.backgroundColor = 'transparent';
+                        e.target.style.color = '#131837';
+                    }}
+                >
+                    Voir plus
                 </button>
             </div>
         </div>

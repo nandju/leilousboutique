@@ -1,3 +1,15 @@
+import shampoing from "./shampoing.png";
+import apres_shampoing from "./apres_shampoing.png";
+import masque from "./masque.png";
+import product_1 from "./product_1.png";
+import product_2 from "./product_2.png";
+import product_3 from "./product_3.png";
+import product_4 from "./product_4.png";
+import product_5 from "./product_5.png";
+import product_6 from "./product_6.png";
+import product_7 from "./product_7.png";
+import logo_truth_sans_fond from "./logo_truth_sans_fond.png";
+import logo_truth from "./logo_truth.png";
 import logo from "./logo.svg";
 import search_icon from "./search_icon.svg";
 import user_icon from "./user_icon.svg";
@@ -48,6 +60,18 @@ import product_details_page_apple_earphone_image4 from "./product_details_page_a
 import product_details_page_apple_earphone_image5 from "./product_details_page_apple_earphone_image5.png";
 
 export const assets = {
+  shampoing,
+  apres_shampoing,
+  masque,
+  product_1,
+  product_2,
+  product_3,
+  product_4,
+  product_5,
+  product_6,
+  product_7,
+  logo_truth_sans_fond,
+  logo_truth,
   logo,
   search_icon,
   user_icon,
