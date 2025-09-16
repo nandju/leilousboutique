@@ -3,116 +3,125 @@ import { assets } from "@/assets/assets";
 import Image from "next/image";
 
 const HeaderSlider = () => {
-const sliderData = [
-  {
-    id: 1,
-    title: "Élégance & Tradition - Découvrez nos Abayas uniques",
-    offer: "Nouveautés exclusives disponibles dès aujourd'hui",
-    buttonText1: "Voir la collection",
-    buttonText2: "En savoir plus",
-    imgSrc: assets.product_2, // Image d'abaya
-  },
-  {
-    id: 2,
-    title: "Plongez dans l’Art des Senteurs Orientales",
-    offer: "Encens & Air Fresheners pour une atmosphère raffinée",
-    buttonText1: "Découvrir",
-    buttonText2: "Explorer les senteurs",
-    imgSrc: assets.product_3, // Image encens/parfum
-  },
-  {
-    id: 3,
-    title: "Charme et Raffinement – Nos Parfums d’Exception",
-    offer: "Offre spéciale -20% sur la gamme Kashkha",
-    buttonText1: "Acheter maintenant",
-    buttonText2: "Voir les offres",
-    imgSrc: assets.product_6, // Image parfum
-  },
-];
-
+  const sliderData = [
+    {
+      id: 1,
+      title: "Élégance & Tradition",
+      subtitle: "Découvrez nos Abayas uniques",
+      offer: "Nouveautés exclusives",
+      buttonText: "Voir la collection",
+      imgSrc: assets.product_2,
+    },
+    {
+      id: 2,
+      title: "Art des Senteurs Orientales",
+      subtitle: "Encens & Air Fresheners",
+      offer: "Atmosphère raffinée",
+      buttonText: "Découvrir",
+      imgSrc: assets.product_3,
+    },
+    {
+      id: 3,
+      title: "Parfums d'Exception",
+      subtitle: "Charme et Raffinement",
+      offer: "-20% sur Kashkha",
+      buttonText: "Acheter",
+      imgSrc: assets.product_6,
+    },
+  ];
 
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % sliderData.length);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
-  }, [sliderData.length]);
-
-  const handleSlideChange = (index) => {
-    setCurrentSlide(index);
-  };
+  }, []);
 
   return (
-    <div className="overflow-hidden relative w-full">
+    <div className="relative w-full h-[280px] md:h-[320px] overflow-hidden rounded-xl my-8" style={{ backgroundColor: '#F6F7EC' }}>
       <div
-        className="flex transition-transform duration-700 ease-in-out"
-        style={{
-          transform: `translateX(-${currentSlide * 100}%)`,
-        }}
+        className="flex h-full transition-transform duration-700 ease-in-out"
+        style={{ transform: `translateX(-${currentSlide * 100}%)` }}
       >
         {sliderData.map((slide, index) => (
           <div
             key={slide.id}
-            className="flex flex-col-reverse md:flex-row items-center justify-between py-8 md:px-14 px-5 mt-6 rounded-xl min-w-full"
-            style={{ backgroundColor: '#F6F7EC' }}
+            className="flex items-center justify-between px-6 md:px-12 min-w-full h-full"
           >
-            <div className="md:pl-8 mt-10 md:mt-0">
-              <p 
-                className="md:text-base pb-1 font-medium"
-                style={{ color: '#E16939' }}
+            {/* Contenu texte */}
+            <div className="flex-1 max-w-md">
+              <div 
+                className="text-xs md:text-sm font-medium px-3 py-1 rounded-full inline-block mb-3"
+                style={{ backgroundColor: '#E16939', color: 'white' }}
               >
                 {slide.offer}
-              </p>
+              </div>
+              
               <h1 
-                className="max-w-lg md:text-[40px] md:leading-[48px] text-2xl font-semibold"
+                className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 leading-tight"
                 style={{ color: '#131837' }}
               >
                 {slide.title}
               </h1>
-              <div className="flex items-center mt-4 md:mt-6 ">
-                <button 
-                  className="md:px-10 px-7 md:py-2.5 py-2 rounded-full text-white font-medium transition-all duration-300 hover:scale-105 hover:shadow-lg"
-                  style={{ backgroundColor: '#E16939' }}
-                >
-                  {slide.buttonText1}
-                </button>
-                <button 
-                  className="group flex items-center gap-2 px-6 py-2.5 font-medium transition-colors duration-300"
-                  style={{ color: '#131837' }}
-                >
-                  {slide.buttonText2}
-                  <Image className="group-hover:translate-x-1 transition" src={assets.arrow_icon} alt="icône flèche" />
-                </button>
-              </div>
+              
+              <p 
+                className="text-sm md:text-base mb-4 opacity-80"
+                style={{ color: '#131837' }}
+              >
+                {slide.subtitle}
+              </p>
+
+              <button 
+                className="px-6 md:px-8 py-2.5 rounded-full text-white font-medium text-sm transition-all duration-300 hover:scale-105 hover:shadow-lg"
+                style={{ backgroundColor: '#E16939' }}
+              >
+                {slide.buttonText}
+              </button>
             </div>
-            <div className="flex items-center flex-1 justify-center">
+
+            {/* Image */}
+            <div className="flex-shrink-0 ml-4">
               <Image
-                className="md:w-72 w-48"
                 src={slide.imgSrc}
-                alt={`Diapositive ${index + 1}`}
+                alt={`Slide ${index + 1}`}
+                className="w-32 h-32 md:w-40 md:h-40 lg:w-48 lg:h-48 object-cover rounded-lg shadow-lg"
+                width={192}
+                height={192}
               />
             </div>
           </div>
         ))}
       </div>
 
-      <div className="flex items-center justify-center gap-2 mt-8">
+      {/* Indicateurs */}
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
         {sliderData.map((_, index) => (
-          <div
+          <button
             key={index}
-            onClick={() => handleSlideChange(index)}
-            className={`h-2 w-2 rounded-full cursor-pointer transition-all duration-300 ${
-              currentSlide === index ? "w-6" : "hover:scale-110"
+            onClick={() => setCurrentSlide(index)}
+            className={`h-2 rounded-full transition-all duration-300 ${
+              currentSlide === index ? "w-8 bg-white" : "w-2 bg-white bg-opacity-50 hover:bg-opacity-70"
             }`}
-            style={{
-              backgroundColor: currentSlide === index ? '#E16939' : '#131837',
-              opacity: currentSlide === index ? 1 : 0.3
-            }}
-          ></div>
+          />
         ))}
       </div>
+
+      {/* Navigation arrows (optionnel) */}
+      <button
+        onClick={() => setCurrentSlide(currentSlide === 0 ? sliderData.length - 1 : currentSlide - 1)}
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full flex items-center justify-center transition-all duration-300"
+      >
+        <span className="text-white font-bold">‹</span>
+      </button>
+      
+      <button
+        onClick={() => setCurrentSlide((currentSlide + 1) % sliderData.length)}
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 w-8 h-8 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full flex items-center justify-center transition-all duration-300"
+      >
+        <span className="text-white font-bold">›</span>
+      </button>
     </div>
   );
 };
